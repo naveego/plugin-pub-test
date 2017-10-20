@@ -23,7 +23,7 @@
   branch = "master"
   name = "github.com/naveego/navigator-go"
   packages = ["publishers/protocol","publishers/server"]
-  revision = "b606d84086255db0d7912513122b347d5cb0920d"
+  revision = "ad3809d70877b1a0b1229cac2caa8c5cc286b293"
 
 [[projects]]
   name = "github.com/satori/go.uuid"
@@ -52,6 +52,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "5922ec9cc0eefe216b11c755e87d8e11907ee0454ff96a27346581f2050a4675"
+  inputs-digest = "9f45340a040cc0e1bce9c781787ef7b4ea07477c91365aaa88620eac588fd1e2"
   solver-name = "gps-cdcl"
   solver-version = 1
