@@ -17,7 +17,12 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+var version string
+var versionHash string
+
 func main() {
+
+	fmt.Println("Version ", version, " #", versionHash)
 
 	logrus.SetOutput(os.Stdout)
 
