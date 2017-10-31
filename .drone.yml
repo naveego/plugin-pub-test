@@ -3,6 +3,10 @@ clone:
     image: plugins/git
     tags: true
 
+workspace:
+  base: /go
+  path: src/github.com/naveego/plugin-pub-test
+
 pipeline:
 
   restore-cache:
