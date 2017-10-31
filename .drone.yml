@@ -18,6 +18,7 @@ pipeline:
     pull: true
     environment:
       - CGO_ENABLED=0
+      - GOPATH=/drone/src
     commands:
       - pwd
       - ls 
