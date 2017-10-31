@@ -12,7 +12,7 @@ pipeline:
     image: drillster/drone-volume-cache
     restore: true
     mount:
-      - vendor
+      - src/github.com/naveego/plugin-pub-test/vendor
       - ../../../../pkg/dep
     volumes:
       - /tmp/cache:/cache
