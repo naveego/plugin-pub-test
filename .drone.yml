@@ -25,7 +25,6 @@ pipeline:
     commands:
       - pwd
       - ls /
-      - ls /go/pkg
       - dep ensure -vendor-only      
       - ls  
     when:
