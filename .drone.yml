@@ -12,7 +12,7 @@ pipeline:
     image: drillster/drone-volume-cache
     restore: true
     mount:
-      - vendor
+      - /go/src/github.com/naveego/plugin-pub-test/vendor
     volumes:
       - /tmp/cache:/cache
 
@@ -33,7 +33,7 @@ pipeline:
     image: drillster/drone-volume-cache
     rebuild: true
     mount:
-      - vendor
+      - /go/src/github.com/naveego/plugin-pub-test/vendor
     volumes:
       - /tmp/cache/plugin-pub-test:/cache
     when:
