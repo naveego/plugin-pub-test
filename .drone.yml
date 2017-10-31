@@ -24,7 +24,8 @@ pipeline:
       - CGO_ENABLED=0
     commands:
       - pwd
-      - ls
+      - ls /
+      - ls /pkg
       - dep ensure -vendor-only      
       - ls  
     when:
@@ -34,7 +35,7 @@ pipeline:
     image: drillster/drone-volume-cache
     rebuild: true
     mount:
-      - vendor
+      - src/github.com/naveego/plugin-pub-test/vendor
       - ../../../../pkg/dep
     volumes:
       - /tmp/cache/plugin-pub-test:/cache
