@@ -25,7 +25,7 @@ pipeline:
       - pwd
       - ls 
       - dep ensure -vendor-only      
-      - ls 
+      - ls vendor
     when:
       event: [ push, pull_request ]
 
