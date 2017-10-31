@@ -4,11 +4,6 @@ clone:
     tags: true
 
 pipeline:
-  build:
-    image: golang
-    commands:
-      - go build
-      - go test
 
   restore-cache:
     image: drillster/drone-volume-cache
@@ -27,7 +22,7 @@ pipeline:
       - pwd
       - ls 
       - dep ensure -vendor-only      
-      - ls vendor
+      - go build
 
   rebuild-cache:
     image: drillster/drone-volume-cache
