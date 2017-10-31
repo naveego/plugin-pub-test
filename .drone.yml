@@ -13,8 +13,9 @@ pipeline:
     restore: true
     mount:
       - vendor
+      - ../../../../pkg/dep
     volumes:
-      - /tmp/cache/plugin-pub-test:/cache
+      - /tmp/cache:/cache
 
   build:
     image: docker.naveego.com:4333/build-go:latest
@@ -22,29 +23,17 @@ pipeline:
     environment:
       - CGO_ENABLED=0
     commands:
-      - dep ensure -vendor-only  
-      - goreleaser --snapshot
+      - ls vendor
+      - dep ensure -vendor-only        
     when:
       event: [ push, pull_request ]
-
-  build-release:
-    image: docker.naveego.com:4333/build-go:latest
-    pull: true
-    environment:
-      - CGO_ENABLED=0
-      - GITHUB_TOKEN=${GITHUB_TOKEN}
-    secrets: [ github_token ]
-    commands:
-      - dep ensure -vendor-only  
-      - goreleaser
-    when: 
-      event: [ tag, deployment ]
 
   rebuild-cache:
     image: drillster/drone-volume-cache
     rebuild: true
     mount:
       - vendor
+      - ../../../../pkg/dep
     volumes:
       - /tmp/cache/plugin-pub-test:/cache
     when:
