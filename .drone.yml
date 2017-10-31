@@ -24,9 +24,9 @@ pipeline:
       - CGO_ENABLED=0
     commands:
       - pwd
-      - ls /
+      - ls 
       - dep ensure -vendor-only      
-      - ls  
+      - ls vendor
     when:
       event: [ push, pull_request ]
 
