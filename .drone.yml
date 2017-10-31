@@ -22,9 +22,11 @@ pipeline:
     pull: true
     environment:
       - CGO_ENABLED=0
-      - GOPATH=/drone/src
+      - GOPATH=/go
     commands:
       - pwd
+      - echo $GOPATH
+      - go env
       - ls 
       - dep ensure -vendor-only      
       - go build
