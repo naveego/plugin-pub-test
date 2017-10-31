@@ -13,7 +13,6 @@ pipeline:
     restore: true
     mount:
       - vendor
-      - ../../../../pkg/dep
     volumes:
       - /tmp/cache:/cache
 
@@ -26,7 +25,7 @@ pipeline:
       - pwd
       - ls 
       - dep ensure -vendor-only      
-      - ls vendor
+      - ls 
     when:
       event: [ push, pull_request ]
 
@@ -35,7 +34,6 @@ pipeline:
     rebuild: true
     mount:
       - vendor
-      - ../../../../pkg/dep
     volumes:
       - /tmp/cache/plugin-pub-test:/cache
     when:
