@@ -3,16 +3,18 @@ clone:
     image: plugins/git
     tags: true
 
-workspace:
-  base: /go
-  path: src/github.com/naveego/plugin-pub-test
-
 pipeline:
+  build:
+    image: golang
+    commands:
+      - go build
+      - go test
+
   restore-cache:
     image: drillster/drone-volume-cache
     restore: true
     mount:
-      - /go/src/github.com/naveego/plugin-pub-test/vendor
+      - vendor
     volumes:
       - /tmp/cache:/cache
 
@@ -26,15 +28,13 @@ pipeline:
       - ls 
       - dep ensure -vendor-only      
       - ls vendor
-    when:
-      event: [ push, pull_request ]
 
   rebuild-cache:
     image: drillster/drone-volume-cache
     rebuild: true
     mount:
-      - /go/src/github.com/naveego/plugin-pub-test/vendor
+      - vendor
     volumes:
-      - /tmp/cache/plugin-pub-test:/cache
+      - /tmp/cache:/cache
     when:
       status:  [ failure, success ]
