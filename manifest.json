@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "iconFile": "icon.png",
     "executable": "plugin-pub-test",
+    "kind": "publisher",
     "configSchema": [
         {
             "name": "file",
