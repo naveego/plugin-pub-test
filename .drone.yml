@@ -7,6 +7,12 @@ workspace:
   base: /go
   path: src/github.com/naveego/plugin-pub-test
 
+matrix:
+  GOOS: 
+    - windows
+    - darwin
+    - linux
+
 pipeline:
 
   restore-cache:
@@ -22,9 +28,19 @@ pipeline:
     pull: true
     environment:
       - CGO_ENABLED=0
+      - GOOS=${GOOS}
     commands:
       - dep ensure -vendor-only      
-      - go build
+      - go build -o plugin-pub-test
+      
+  publish-test:
+    image: docker.naveego.com:4333/navget-drone:latest
+    pull: true
+    endpoint: http://navget.naveego.test
+    files: plugin-pub-test     
+    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjAwMDAwMCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDEvdmFuZGVsYXkiLCJzdWIiOiJzZXJ2aWNlL2dpdGh1Yi1kcm9uZSIsImF1ZCI6InZhbmRlbGF5IiwibmFtZSI6IkFydCBWYW5kZWxheSIsImdpdmVuX25hbWUiOiJBcnQiLCJmYW1pbHlfbmFtZSI6IlZhbmRlbGF5IiwiZW1haWwiOiJhcnRAdGVtcC5vcmciLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhcnQudmFuZGVsYXkiLCJ6b25lX2luZm8iOiJBbWVyaWNhL05ldyBZb3JrIiwia2lkIjoiMDAwMDAwIiwic3ViX3R5cGUiOiJzZXJ2aWNlIiwianRpIjoiYWViZDlmYzktZTBlYi00ZjJhLWEwMTUtNjdiZmZkYzk3ZmRiIiwiaWF0IjoxNTA5NDY0ODIxLCJleHAiOjI1MjQ2MDgwMDAsIm5iZiI6MTQ4MzIyODgwMH0.F2LBzO4l6WXMjA5-FzhY1Wki8_C3j0-QfSQ0L7G9Mp5m39-UmNW58tJiFuKkc9To9Ej96jWofsT8EDK5SqkNTW3bFtGpLnTLjl4WVGImhTWQwQ8vX28lhUTdaF6A35JGdzqGCXV_4ruBq_pUiXu_5x-bOavQjk6OuGX-lEBEIv-GBT9KTi68GECtAMhC-lK0kaYgDMDL4k_ajS4MiDQL66UPC4frBvuA4yttDWZaSuNNogsZGrh0LgMJTeb-R-t_2snBgfnlEkpFS8Ly21IUvVNdxuDz6zjySxY8rLlszOy_oTZ-7pSKeGP1Nx5ZAyGhqe4xfOus5rkF-OGPeGj0-w
+    os: ${GOOS}
+
 
   rebuild-cache:
     image: drillster/drone-volume-cache
@@ -35,3 +51,5 @@ pipeline:
       - /tmp/cache:/cache
     when:
       status:  [ failure, success ]
+
+
