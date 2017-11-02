@@ -1,5 +1,6 @@
 {
     "name": "pub-test",
+    "displayName": "Test publisher",
     "description": "Test publisher which outputs generated data.",
     "versionDescription": "Version 1",
     "version": "1.0.0",
